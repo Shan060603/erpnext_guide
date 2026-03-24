@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <rect fill="#f8fafc" width="800" height="200"/>
+  <rect x="10" y="60" width="100" height="55" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="60" y="92" text-anchor="middle" font-family="Arial" font-size="11" fill="#be185d">Purchase</text>
+  <text x="60" y="104" text-anchor="middle" font-family="Arial" font-size="11" fill="#be185d">Receipt</text>
+  
+  <line x1="110" y1="87" x2="140" y2="87" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="140" y="60" width="100" height="55" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="190" y="92" text-anchor="middle" font-family="Arial" font-size="11" fill="#be185d">Warehouse</text>
+  
+  <line x1="240" y1="87" x2="270" y2="87" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="270" y="60" width="100" height="55" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="320" y="92" text-anchor="middle" font-family="Arial" font-size="11" fill="#be185d">Delivery</text>
+  <text x="320" y="104" text-anchor="middle" font-family="Arial" font-size="11" fill="#be185d">Note</text>
+  
+  <line x1="370" y1="87" x2="400" y2="87" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="400" y="60" width="100" height="55" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="450" y="92" text-anchor="middle" font-family="Arial" font-size="11" fill="#be185d">Stock</text>
+  <text x="450" y="104" text-anchor="middle" font-family="Arial" font-size="11" fill="#be185d">Movement</text>
+  
+  <line x1="500" y1="87" x2="530" y2="87" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="530" y="60" width="100" height="55" rx="8" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+  <text x="580" y="92" text-anchor="middle" font-family="Arial" font-size="11" fill="#4338ca">Landed</text>
+  <text x="580" y="104" text-anchor="middle" font-family="Arial" font-size="11" fill="#4338ca">Cost</text>
+  
+  <line x1="630" y1="87" x2="660" y2="87" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="660" y="60" width="100" height="55" rx="8" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+  <text x="710" y="92" text-anchor="middle" font-family="Arial" font-size="11" fill="#4338ca">Journal</text>
+  <text x="710" y="104" text-anchor="middle" font-family="Arial" font-size="11" fill="#4338ca">Entry</text>
+</svg>

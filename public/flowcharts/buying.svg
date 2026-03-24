@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <rect fill="#f8fafc" width="800" height="200"/>
+  <rect x="5" y="60" width="80" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="45" y="89" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">Material</text>
+  <text x="45" y="101" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">Request</text>
+  
+  <line x1="85" y1="85" x2="110" y2="85" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="110" y="60" width="70" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="145" y="89" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">RFQ</text>
+  
+  <line x1="180" y1="85" x2="205" y2="85" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="205" y="60" width="70" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="240" y="89" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">Supplier</text>
+  <text x="240" y="101" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">Quote</text>
+  
+  <line x1="275" y1="85" x2="300" y2="85" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="300" y="60" width="80" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="340" y="89" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">Purchase</text>
+  <text x="340" y="101" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">Order</text>
+  
+  <line x1="380" y1="85" x2="405" y2="85" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="405" y="60" width="80" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="445" y="89" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">Purchase</text>
+  <text x="445" y="101" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">Receipt</text>
+  
+  <line x1="485" y1="85" x2="510" y2="85" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="510" y="60" width="80" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="550" y="89" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">Purchase</text>
+  <text x="550" y="101" text-anchor="middle" font-family="Arial" font-size="10" fill="#b45309">Invoice</text>
+  
+  <line x1="590" y1="85" x2="615" y2="85" stroke="#64748b" stroke-width="2"/>
+  
+  <rect x="615" y="60" width="80" height="50" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="655" y="89" text-anchor="middle" font-family="Arial" font-size="10" fill="#15803d">Payment</text>
+</svg>
