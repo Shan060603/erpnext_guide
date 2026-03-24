@@ -9,18 +9,22 @@ interface MermaidProps {
 export default function Mermaid({ chart }: MermaidProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [mounted, setMounted] = useState(false)
-  const [scale, setScale] = useState(1)
+  const [scale, setScale] = useState(1.0)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   const handleZoomIn = useCallback(() => {
-    setScale(prev => Math.min(prev + 0.25, 2))
+    setScale(prev => Math.min(prev + 0.25, 3))
   }, [])
 
   const handleZoomOut = useCallback(() => {
     setScale(prev => Math.max(prev - 0.25, 0.5))
+  }, [])
+
+  const handleReset = useCallback(() => {
+    setScale(1.0)
   }, [])
 
   useEffect(() => {
@@ -75,6 +79,13 @@ export default function Mermaid({ chart }: MermaidProps) {
           −
         </button>
         <button
+          onClick={handleReset}
+          className="px-3 h-8 flex items-center justify-center bg-blue-100 text-blue-700 rounded hover:bg-blue-200 text-sm font-medium"
+          title="Reset Zoom"
+        >
+          Reset
+        </button>
+        <button
           onClick={handleZoomIn}
           className="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-700 rounded hover:bg-gray-300 text-lg font-bold"
           title="Zoom In"
@@ -82,19 +93,20 @@ export default function Mermaid({ chart }: MermaidProps) {
           +
         </button>
         <span className="text-xs text-gray-500 ml-2">
-          {scale === 1 ? '100%' : `${Math.round(scale * 100)}%`}
+          {Math.round(scale * 100)}%
         </span>
       </div>
 
       {/* Centered Flowchart Container */}
-      <div className="flex justify-center overflow-x-auto border rounded-xl bg-white shadow-md">
-        <div 
+      <div className="flex justify-center overflow-x-auto border rounded-xl bg-white shadow-md p-8">
+        <div
           ref={containerRef}
-          className="inline-block"
-          style={{ 
+          className="w-full flex justify-center items-center"
+          style={{
             transform: `scale(${scale})`,
-            transformOrigin: 'top center',
-            width: scale !== 1 ? `${100 / scale}%` : 'auto'
+            transformOrigin: 'center center',
+            minHeight: '600px',
+            minWidth: '100%'
           }}
         />
       </div>
