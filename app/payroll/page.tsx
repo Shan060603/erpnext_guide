@@ -2,57 +2,35 @@ import Mermaid from '@/components/Mermaid'
 import Section from '@/components/Section'
 import StepCard from '@/components/StepCard'
 
-const payrollFlowchart = `flowchart TD
-%% ===========================
-%% Payroll / Salary Payout Module
-%% ===========================
+const mastersFlowchart = `flowchart TD
+  A[Salary Component] --> B[Salary Structure]
+  B --> C[Income Tax Slab]
+  C --> D[Payroll Period]`
 
-%% ===========================
-%% Masters
-%% ===========================
-A[Salary Component] --> B[Salary Structure]
-B --> C[Income Tax Slab]
-C --> D[Payroll Period]
+const payrollTransactionsFlowchart = `flowchart TD
+  A[Salary Structure Assignment] --> B[Bulk Salary Structure Assignment]
+  B --> C[Create Payroll Entry]
+  C --> D[Generate Salary Slips]
+  D --> E{Salary Review / Approval?}
+  E -->|Approved| F[Salary Withholding & Payment Entry]
+  E -->|Rejected| D[Revise Salary Slips]`
 
-%% ===========================
-%% Payroll Transactions
-%% ===========================
-D --> E[Salary Structure Assignment]
-E --> F[Bulk Salary Structure Assignment]
-F --> G[Create Payroll Entry]
-G --> H[Generate Salary Slips]
-H --> I{Salary Review / Approval?}
-I -->|Approved| J[Salary Withholding & Payment Entry]
-I -->|Rejected| H[Revise Salary Slips]
+const incentivesFlowchart = `flowchart TD
+  A[Additional Salary] --> B[Employee Incentive]
+  B --> C[Retention Bonus]`
 
-%% ===========================
-%% Incentives & Additional Payments
-%% ===========================
-J --> K[Additional Salary]
-J --> L[Employee Incentive]
-J --> M[Retention Bonus]
+const accountingFlowchart = `flowchart TD
+  A[Chart of Accounts] --> B[Chart of Cost Centers]
+  B --> C[Journal Entry]`
 
-%% ===========================
-%% Accounting Integration
-%% ===========================
-J --> N[Chart of Accounts]
-J --> O[Chart of Cost Centers]
-J --> P[Journal Entry]
-
-%% ===========================
-%% Payroll Reports
-%% ===========================
-J --> T[Salary Register]
-J --> U[Bank Remittance]
-J --> V[Salary Payments Based On Payment Mode]
-J --> X[Income Tax Computation]
-
-%% ===========================
-%% Deduction Reports
-%% ===========================
-J --> Y[Provident Fund Deductions]
-J --> Z[Professional Tax Deductions]
-J --> AA[Income Tax Deductions]`
+const reportsFlowchart = `flowchart TD
+  A[Salary Register]
+  B[Bank Remittance]
+  C[Salary Payments Based On Payment Mode]
+  D[Income Tax Computation]
+  E[Provident Fund Deductions]
+  F[Professional Tax Deductions]
+  G[Income Tax Deductions]`
 
 const taxBenefitsFlowchart = `flowchart TD
 %% ===========================
@@ -93,19 +71,53 @@ export default function PayrollPage() {
     <div>
       <h1 className="text-4xl font-bold text-gray-900 mb-8">Payroll Module</h1>
       
-      <Section title="Payroll / Salary Payout Workflow">
-        <Mermaid chart={payrollFlowchart} />
-      </Section>
-
-      <Section title="Tax & Benefits Workflow">
-        <Mermaid chart={taxBenefitsFlowchart} />
-      </Section>
-      
       <Section title="Overview">
         <p>
           The Payroll module handles salary processing, tax computations, and employee benefits management.
           It ensures accurate and timely salary payments while maintaining compliance with tax regulations.
           This module integrates with Accounting for financial reporting.
+        </p>
+      </Section>
+      
+      <Section title="1. Masters">
+        <Mermaid chart={mastersFlowchart} />
+        <p>
+          Define salary components, structures, tax slabs, and payroll periods.
+        </p>
+      </Section>
+      
+      <Section title="2. Payroll Transactions">
+        <Mermaid chart={payrollTransactionsFlowchart} />
+        <p>
+          Process salary assignments, payroll entries, and salary slip generation.
+        </p>
+      </Section>
+      
+      <Section title="3. Incentives & Additional Payments">
+        <Mermaid chart={incentivesFlowchart} />
+        <p>
+          Manage additional salary, employee incentives, and retention bonuses.
+        </p>
+      </Section>
+      
+      <Section title="4. Accounting Integration">
+        <Mermaid chart={accountingFlowchart} />
+        <p>
+          Integrate payroll with chart of accounts, cost centers, and journal entries.
+        </p>
+      </Section>
+      
+      <Section title="5. Reports">
+        <Mermaid chart={reportsFlowchart} />
+        <p>
+          Generate salary register, bank remittance, and tax computation reports.
+        </p>
+      </Section>
+      
+      <Section title="6. Tax & Benefits Workflow">
+        <Mermaid chart={taxBenefitsFlowchart} />
+        <p>
+          Manage tax exemptions, employee benefits, and related workflows.
         </p>
       </Section>
       

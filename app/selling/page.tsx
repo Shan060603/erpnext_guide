@@ -73,6 +73,51 @@ const interCompanyFlowchart = `flowchart TD
   style N fill:#fff9c4
   style O fill:#fff9c4`
 
+const productBundleFlowchart = `flowchart TD
+  %% ===========================
+  %% Product Bundle Structure
+  %% ===========================
+  A[Parent Item] --> B{Is Stock Item?}
+  B -->|No| C[Virtual Item]
+  B -->|Yes| D[ERROR: Parent Cannot Be Stockable]
+  
+  C --> E[Set Selling Price]
+  E --> F[Create Product Bundle]
+  
+  F --> G[Child Item 1]
+  F --> H[Child Item 2]
+  F --> I[Child Item 3]
+  
+  G --> J{Is Stock Item?}
+  H --> K{Is Stock Item?}
+  I --> L{Is Stock Item?}
+  
+  J -->|Yes| M[Track in Inventory]
+  K -->|Yes| N[Track in Inventory]
+  L -->|Yes| O[Track in Inventory]
+  
+  J -->|No| P[ERROR: Child Must Be Stockable]
+  K -->|No| Q[ERROR: Child Must Be Stockable]
+  L -->|No| R[ERROR: Child Must Be Stockable]
+  
+  M --> S[Use in Sales Order]
+  N --> S
+  O --> S
+  
+  S --> T[Pick Child Items from Stock]
+  T --> U[Deliver Bundle to Customer]
+  
+  style A fill:#e1f5fe
+  style C fill:#c8e6c9
+  style D fill:#ffcdd2
+  style P fill:#ffcdd2
+  style Q fill:#ffcdd2
+  style R fill:#ffcdd2
+  style M fill:#fff9c4
+  style N fill:#fff9c4
+  style O fill:#fff9c4
+  style U fill:#c8e6c9`
+
 export default function SellingPage() {
   return (
     <div>
@@ -150,6 +195,125 @@ export default function SellingPage() {
               'Reconcile bank statements automatically',
             ]}
           />
+        </div>
+      </Section>
+      
+      <Section title="Product Bundle Creation">
+        <p className="mb-4">
+          Product Bundles allow you to sell multiple items together as a single package, perfect for promotional offers, 
+          gift sets, or combo deals. The parent item acts as a virtual container and should NOT be stockable—only the 
+          child items (components) are tracked in inventory.
+        </p>
+        
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+          <p className="text-blue-800 font-medium">💡 Key Concept: Parent Item is NOT Stockable</p>
+          <p className="text-blue-700 text-sm mt-1">
+            The parent item in a Product Bundle is a virtual item used only for pricing and sales. 
+            It does not have stock levels—only the child items are tracked in inventory.
+          </p>
+        </div>
+      </Section>
+      
+      <Mermaid chart={productBundleFlowchart} />
+      
+      <Section title="Creating a Product Bundle">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StepCard
+            title="1. Create Parent Item"
+            description="Create the bundle item that will be sold to customers."
+            bullets={[
+              'Go to Item list and create new item',
+              'Set Item Code and Item Name (e.g., "Promo Bundle A")',
+              'Set Item Group (e.g., "Promotional Items")',
+              '⚠️ Set "Is Stock Item" = No (CRITICAL)',
+              'Set "Is Sales Item" = Yes',
+              'Set selling price for the bundle',
+            ]}
+          />
+          <StepCard
+            title="2. Create Child Items"
+            description="Create or use existing items that will be included in the bundle."
+            bullets={[
+              'Each component must be a stockable item',
+              'Set "Is Stock Item" = Yes for each child',
+              'Ensure child items have stock levels',
+              'Set individual selling prices if needed',
+            ]}
+          />
+          <StepCard
+            title="3. Create Product Bundle"
+            description="Link the parent and child items together."
+            bullets={[
+              'Go to Product Bundle list',
+              'Create new Product Bundle',
+              'Select the parent item',
+              'Add child items with quantities',
+              'Save the bundle',
+            ]}
+          />
+          <StepCard
+            title="4. Use in Sales"
+            description="Add the bundle to quotations and sales orders."
+            bullets={[
+              'Add parent item to Quotation or Sales Order',
+              'System auto-expands to show child items',
+              'Child items are picked from inventory',
+              'Parent item price is used for billing',
+            ]}
+          />
+        </div>
+      </Section>
+      
+      <Section title="Bundle Requirements">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StepCard
+            title="Parent Item Settings"
+            description="Critical settings for the bundle parent item."
+            bullets={[
+              'Is Stock Item = No (MUST be unchecked)',
+              'Is Sales Item = Yes',
+              'Has Variants = No',
+              'Include Item in Manufacturing = No',
+              'Set appropriate Item Group',
+              'Set selling price for the bundle',
+            ]}
+          />
+          <StepCard
+            title="Child Item Settings"
+            description="Settings for items included in the bundle."
+            bullets={[
+              'Is Stock Item = Yes (MUST be checked)',
+              'Is Sales Item = Yes (optional)',
+              'Maintain stock levels in warehouses',
+              'Set default warehouse for picking',
+              'Can have variants if needed',
+            ]}
+          />
+        </div>
+      </Section>
+      
+      <Section title="Promotional Bundle Example">
+        <div className="bg-gray-50 p-6 rounded-lg">
+          <h4 className="font-semibold text-gray-900 mb-3">Example: "Summer Sale Bundle"</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p className="text-sm font-medium text-gray-700 mb-2">Parent Item (NOT Stockable):</p>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>• Item Code: BUNDLE-SUMMER-001</li>
+                <li>• Name: Summer Sale Bundle</li>
+                <li>• Is Stock Item: <span className="text-red-600 font-medium">No</span></li>
+                <li>• Selling Price: $99.00</li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-700 mb-2">Child Items (Stockable):</p>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>• 1x T-Shirt (SKU: TSHIRT-001) - <span className="text-green-600">In Stock</span></li>
+                <li>• 1x Cap (SKU: CAP-001) - <span className="text-green-600">In Stock</span></li>
+                <li>• 2x Sunglasses (SKU: SUNG-001) - <span className="text-green-600">In Stock</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </Section>
       

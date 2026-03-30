@@ -58,7 +58,7 @@ export default function Mermaid({ chart }: MermaidProps) {
     <div className="mb-8 border rounded-xl bg-white shadow-md p-4 overflow-x-auto">
       <div
         ref={containerRef}
-        className="min-h-[600px]"
+        className="min-h-[600px] flex justify-center"
       />
     </div>
   )

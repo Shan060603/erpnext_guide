@@ -2,88 +2,67 @@ import Mermaid from '@/components/Mermaid'
 import Section from '@/components/Section'
 import StepCard from '@/components/StepCard'
 
-const inventoryFlowchart = `flowchart TD
-%% ===========================
-%% Stock / Inventory Module (ERPNext v15)
-%% ===========================
+const mastersFlowchart = `flowchart TD
+  A1[Item] --> A2[Item Group]
+  A2 --> A3[Product Bundle]
+  A3 --> A4[Shipping Rule]
+  A4 --> A5[Item Alternative]
+  A5 --> A6[Item Manufacturer]`
 
-%% Masters / Items Catalogue
-A[Item] --> B[Item Group]
-B --> C[Product Bundle]
-C --> D[Shipping Rule]
-D --> E[Item Alternative]
-E --> F[Item Manufacturer]
+const settingsFlowchart = `flowchart TD
+  B1[Stock Settings] --> B2[Warehouse]
+  B2 --> B3[Unit of Measure]
+  B3 --> B4[Item Variant Settings]
+  B4 --> B5[Brand]
+  B5 --> B6[Item Attribute]
+  B6 --> B7[UOM Conversion Factor]`
 
-%% Stock Settings / Configuration
-G[Stock Settings] --> H[Warehouse]
-H --> I[Unit of Measure]
-I --> J[Item Variant Settings]
-J --> K[Brand]
-K --> L[Item Attribute]
-L --> M[UOM Conversion Factor]
+const transactionsFlowchart = `flowchart TD
+  C1[Material Request] --> C2[Stock Entry]
+  C2 --> C3{Transaction Type}
+  C3 -->|Delivery| C4[Delivery Note]
+  C3 -->|Receipt| C5[Purchase Receipt]
+  C3 -->|Transfer Pick| C6[Pick List Delivery Trip]
+  C5 --> C7[Update Stock Ledger Stock Balance]
+  C4 --> C7
+  C6 --> C7`
 
-%% Stock Transactions
-N[Material Request] --> O[Stock Entry]
-O --> P{Transaction Type}
-P -->|Delivery| Q[Delivery Note]
-P -->|Receipt| R[Purchase Receipt]
-P -->|Transfer Pick| S[Pick List Delivery Trip]
-R --> T[Update Stock Ledger Stock Balance]
-Q --> T
-S --> T
+const trackingFlowchart = `flowchart TD
+  D1[Serial No] --> D2[Serial No Status]
+  D2 --> D3[Installation Note]
+  D3 --> D4[Serial No Warranty Expiry]
+  D4 --> D5[Serial No Service Contract Expiry]
+  
+  D6[Batch] --> D7[Batch Status]
+  D7 --> D8[Batch Item Expiry Status]`
 
-%% Serial No / Batch Tracking
-U[Serial No] --> V[Serial No Status]
-V --> W[Installation Note]
-W --> X[Serial No Warranty Expiry]
-X --> Y[Serial No Service Contract Expiry]
+const toolsFlowchart = `flowchart TD
+  E1[Stock Reconciliation] --> E2[Update Stock Ledger]
+  E3[Landed Cost Voucher] --> E2
+  E4[Packing Slip] --> E5[Update Stock Ledger]
+  E6[Quality Inspection] --> E7[Quality Inspection Template]
+  E8[Quick Stock Balance] --> E9[Stock Balance Verification]`
 
-Z[Batch] --> AA[Batch Status]
-AA --> AB[Batch Item Expiry Status]
-
-%% Tools / Stock Maintenance
-AC[Stock Reconciliation] --> AD[Update Stock Ledger]
-AE[Landed Cost Voucher] --> AD
-AF[Packing Slip] --> T
-AG[Quality Inspection] --> AH[Quality Inspection Template]
-AI[Quick Stock Balance] --> AJ[Stock Balance Verification]
-
-%% Stock Reports
-T --> AK[Stock Ledger]
-T --> AL[Stock Balance]
-T --> AM[Stock Projected Qty]
-T --> AN[Stock Summary]
-T --> AO[Stock Ageing]
-T --> AP[Item Price Stock]
-T --> AQ[Warehouse Wise Stock Balance]
-
-%% Key Reports
-T --> AR[Stock Analytics]
-Q --> AS[Delivery Note Trends]
-R --> AT[Purchase Receipt Trends]
-O --> AU[Sales Order Analysis]
-O --> AV[Purchase Order Analysis]
-T --> AW[Item Shortage Report]
-Z --> AX[Batch-Wise Balance History]
-
-%% Other Reports
-N --> AY[Requested Items To Be Transferred]
-Z --> AZ[Batch Item Expiry Status]
-K --> BA[Item Prices]
-B --> BB[Itemwise Recommended Reorder Level]
-J --> BC[Item Variant Details]
-AU --> BD[Subcontracted Raw Materials To Be Transferred]
-AV --> BE[Subcontracted Item To Be Received]
-
-%% Optional Trigger Box
-T --> BF[Triggers Accounting Inventory Updates]`
+const reportsFlowchart = `flowchart TD
+  F1[Stock Ledger]
+  F2[Stock Balance]
+  F3[Stock Projected Qty]
+  F4[Stock Summary]
+  F5[Stock Ageing]
+  F6[Item Price Stock]
+  F7[Warehouse Wise Stock Balance]
+  F8[Stock Analytics]
+  F9[Delivery Note Trends]
+  F10[Purchase Receipt Trends]
+  F11[Sales Order Analysis]
+  F12[Purchase Order Analysis]
+  F13[Item Shortage Report]
+  F14[Batch-Wise Balance History]`
 
 export default function InventoryPage() {
   return (
     <div>
       <h1 className="text-4xl font-bold text-gray-900 mb-8">Inventory Module</h1>
-      
-      <Mermaid chart={inventoryFlowchart} />
       
       <Section title="Overview">
         <p>
@@ -94,6 +73,7 @@ export default function InventoryPage() {
       </Section>
       
       <Section title="1. Masters / Items Catalogue">
+        <Mermaid chart={mastersFlowchart} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StepCard
             title="Item"
@@ -153,6 +133,7 @@ export default function InventoryPage() {
       </Section>
       
       <Section title="2. Stock Settings / Configuration">
+        <Mermaid chart={settingsFlowchart} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StepCard
             title="Stock Settings"
@@ -214,6 +195,7 @@ export default function InventoryPage() {
       </Section>
       
       <Section title="3. Stock Transactions">
+        <Mermaid chart={transactionsFlowchart} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StepCard
             title="Material Request"
@@ -279,6 +261,7 @@ export default function InventoryPage() {
       </Section>
       
       <Section title="4. Serial No / Batch Tracking">
+        <Mermaid chart={trackingFlowchart} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StepCard
             title="Serial No"
@@ -305,6 +288,7 @@ export default function InventoryPage() {
       </Section>
       
       <Section title="5. Tools / Stock Maintenance">
+        <Mermaid chart={toolsFlowchart} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StepCard
             title="Stock Reconciliation"
@@ -357,6 +341,7 @@ export default function InventoryPage() {
       </Section>
       
       <Section title="6. Reports">
+        <Mermaid chart={reportsFlowchart} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StepCard
             title="Stock Ledger"
