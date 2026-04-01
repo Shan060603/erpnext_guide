@@ -309,21 +309,6 @@ export default function BuyingPage() {
         </div>
       </Section>
       
-      <Section title="Returns & Refunds">
-        <Mermaid chart={buyingReturnsFlowchart} />
-        <p className="mb-4">
-          Returns and refunds in the Buying module allow you to return goods to suppliers and receive credit or refunds. 
-          This process uses Purchase Return and Debit Note documents to reverse the original purchase transaction.
-        </p>
-        
-        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
-          <p className="text-blue-800 font-medium">🔄 Return Process Flow</p>
-          <p className="text-blue-700 text-sm mt-1">
-            Purchase Invoice → Purchase Return → Debit Note → Payment Refund
-          </p>
-        </div>
-      </Section>
-      
       <Section title="Key Takeaways">
         <ul className="space-y-3 text-gray-700">
           <li>✓ Always create Material Requests before purchasing</li>

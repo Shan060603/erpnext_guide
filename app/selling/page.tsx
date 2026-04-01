@@ -476,21 +476,6 @@ export default function SellingPage() {
         </div>
       </Section>
       
-      <Section title="Returns & Refunds">
-        <Mermaid chart={sellingReturnsFlowchart} />
-        <p className="mb-4">
-          Returns and refunds in the Selling module allow you to accept returned goods from customers and issue credit or refunds. 
-          This process uses Sales Return and Credit Note documents to reverse the original sales transaction.
-        </p>
-        
-        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
-          <p className="text-blue-800 font-medium">🔄 Return Process Flow</p>
-          <p className="text-blue-700 text-sm mt-1">
-            Sales Invoice → Sales Return → Credit Note → Payment Refund
-          </p>
-        </div>
-      </Section>
-      
       <Section title="Key Takeaways">
         <ul className="space-y-3 text-gray-700">
           <li>✓ Always create Sales Orders from accepted Quotations</li>
