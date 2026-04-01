@@ -533,6 +533,102 @@ export default function AccountingPage() {
         </div>
       </Section>
       
+      <Section title="Customer Wallet (Advance Payments)">
+        <p className="mb-4">
+          The Customer Wallet feature allows you to manage advance payments and store credit for customers. 
+          This is useful when customers pay upfront and use their balance over time for multiple purchases.
+        </p>
+        
+        <div className="bg-green-50 border-l-4 border-green-400 p-4 mb-6">
+          <p className="text-green-800 font-medium">💡 Customer Wallet Overview</p>
+          <p className="text-green-700 text-sm mt-1">
+            When a customer pays a large amount upfront (e.g., ₱175,000), you can treat this as "Store Credit" 
+            that they can spend down over time. The system tracks their balance and allows you to apply it to future invoices.
+          </p>
+        </div>
+        
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Step 1: Recording the Deposit</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <StepCard
+            title="Create Payment Entry"
+            description="Record the advance payment received from the customer."
+            bullets={[
+              'Go to Payment Entry and create new entry',
+              'Set Payment Type to "Receive"',
+              'Select the customer account',
+              'Set the Paid Amount to the full amount swiped (e.g., ₱175,000)',
+            ]}
+          />
+          <StepCard
+            title="Record Merchant Fee Deduction"
+            description="Record the credit card processing fee as a deduction."
+            bullets={[
+              'Scroll to the "Deductions or Loss" table',
+              'Add a new row for the 4.5% Merchant Fee',
+              'Enter the fee amount (e.g., ₱7,875 for ₱175,000)',
+              'Link to "Bank Charges" expense account',
+            ]}
+          />
+        </div>
+        
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+          <p className="text-yellow-800 font-medium">⚠️ Important: Net Cash Received</p>
+          <p className="text-yellow-700 text-sm mt-1">
+            After recording the 4.5% merchant fee deduction, the resulting "Unallocated Amount" in the bank 
+            will be the net cash received (e.g., ₱167,125 for a ₱175,000 payment). This ensures your bank 
+            reconciliation matches the actual deposit amount.
+          </p>
+        </div>
+        
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Step 2: Spending the Credit</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <StepCard
+            title="Create Sales Invoice"
+            description="Generate an invoice when the customer picks up materials."
+            bullets={[
+              'Create a new Sales Invoice for the customer',
+              'Add the items being purchased',
+              'Save and submit the invoice',
+              'Navigate to the "Advances" section',
+            ]}
+          />
+          <StepCard
+            title="Apply Wallet Balance"
+            description="Use the customer's advance payment to settle the invoice."
+            bullets={[
+              'Click "Get Advances Received" button',
+              'Select the advance payment from the list',
+              'The system will auto-apply the available balance',
+              'Submit the invoice to complete the transaction',
+            ]}
+          />
+        </div>
+        
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Step 3: Checking the Balance</h3>
+        <div className="bg-gray-50 p-6 rounded-lg">
+          <h4 className="font-semibold text-gray-900 mb-3">Reading the Customer Dashboard</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p className="text-sm font-medium text-gray-700 mb-2">Understanding Balances:</p>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>• <span className="text-red-600 font-medium">Negative "Total Unpaid"</span> = Customer has credit remaining</li>
+                <li>• Example: -₱95,000 means ₱95,000 credit available</li>
+                <li>• <span className="text-green-600 font-medium">Positive "Total Unpaid"</span> = Customer owes money</li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-700 mb-2">Where to Check:</p>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>• Go to Customer Dashboard</li>
+                <li>• View "Billing and Currency" section</li>
+                <li>• Check "Total Unpaid" field</li>
+                <li>• Negative value = Available credit</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Section>
+      
       <Section title="Key Takeaways">
         <ul className="space-y-3 text-gray-700">
           <li>✓ Configure chart of accounts before processing transactions</li>
