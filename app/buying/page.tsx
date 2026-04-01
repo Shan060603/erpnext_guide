@@ -42,8 +42,8 @@ const interCompanyFlowchart = `flowchart TD
   D --> B
   C -->|Yes| E[Submit Sales Invoice]
   
-  E --> F[Click Create]
-  F --> G[Inter Company Purchase Invoice]
+  E --> F[Share Transaction with Branch]
+  F --> G[Branch Creates Inter Company Purchase Invoice]
   G --> H[Draft Created in Branch]
   
   H --> I[Switch to Branch Company]
@@ -56,9 +56,34 @@ const interCompanyFlowchart = `flowchart TD
   M --> O[Update Accounting Records]
   
   style A fill:#e1f5fe
+  style F fill:#fff3e0
+  style G fill:#fff3e0
   style M fill:#c8e6c9
   style N fill:#fff9c4
   style O fill:#fff9c4`
+
+const buyingReturnsFlowchart = `flowchart TD
+  %% ===========================
+  %% Buying Returns & Refunds Flow
+  %% ===========================
+  A[Purchase Invoice] --> B{Goods Satisfactory?}
+  B -->|No| C[Create Purchase Return]
+  C --> D[Receive Returned Goods]
+  D --> E[Inspect Returned Items]
+  E --> F{Items Accepted?}
+  F -->|Yes| G[Create Debit Note]
+  F -->|No| H[Reject Return - Inform Supplier]
+  G --> I[Update Inventory Levels]
+  I --> J[Create Payment Refund]
+  J --> K[Update Supplier Account]
+  K --> L[Refund Process Complete]
+  
+  style A fill:#e3f2fd
+  style C fill:#fff3e0
+  style G fill:#fff3e0
+  style J fill:#fff3e0
+  style L fill:#c8e6c9
+  style H fill:#ffcdd2`
 
 export default function BuyingPage() {
   return (
@@ -161,9 +186,33 @@ export default function BuyingPage() {
           <p className="text-yellow-800 font-medium">⚠️ Important: Do NOT use standard Stock Entry for inter-company transfers</p>
           <p className="text-yellow-700 text-sm mt-1">Using Stock Entry will cause warehouse filtering errors and break accounting balance.</p>
         </div>
+        
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+          <p className="text-blue-800 font-medium">💡 Sharing Transactions Between Companies</p>
+          <p className="text-blue-700 text-sm mt-1">
+            After Company A creates a Sales/Purchase Invoice, they can share the transaction with Company B. 
+            Company B can then create the Inter-Company Purchase Invoice for their own company, ensuring proper 
+            accounting entries in both companies.
+          </p>
+        </div>
       </Section>
       
       <Mermaid chart={interCompanyFlowchart} />
+      
+      <Section title="Returns & Refunds">
+        <Mermaid chart={buyingReturnsFlowchart} />
+        <p className="mb-4">
+          Returns and refunds in the Buying module allow you to return goods to suppliers and receive credit or refunds. 
+          This process uses Purchase Return and Debit Note documents to reverse the original purchase transaction.
+        </p>
+        
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+          <p className="text-blue-800 font-medium">🔄 Return Process Flow</p>
+          <p className="text-blue-700 text-sm mt-1">
+            Purchase Invoice → Purchase Return → Debit Note → Payment Refund
+          </p>
+        </div>
+      </Section>
       
       <Section title="Prerequisites">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -190,8 +239,8 @@ export default function BuyingPage() {
         </div>
       </Section>
       
-      <Section title="The 3-Step Process">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <Section title="The 4-Step Process">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StepCard
             title="Step 1: Create Sales Invoice in HQ"
             description="Create a Sales Invoice in the HQ company with stock update enabled."
@@ -203,17 +252,27 @@ export default function BuyingPage() {
             ]}
           />
           <StepCard
-            title="Step 2: Create Inter-Company Purchase Invoice"
-            description="From the submitted HQ invoice, create the inter-company purchase invoice."
+            title="Step 2: Share Transaction with Branch"
+            description="Share the submitted Sales Invoice with the branch company."
             bullets={[
-              'Click "Create" → "Inter Company Purchase Invoice"',
-              'System auto-creates draft in branch company',
-              'Invoice links to original HQ invoice',
-              'Maintains audit trail across companies',
+              'Use the "Share" feature in the Sales Invoice',
+              'Select the branch company to share with',
+              'Branch receives notification of shared transaction',
+              'Branch can view the transaction details',
             ]}
           />
           <StepCard
-            title="Step 3: Submit in Branch Company"
+            title="Step 3: Branch Creates Inter-Company Purchase Invoice"
+            description="Branch company creates the Inter-Company Purchase Invoice from the shared transaction."
+            bullets={[
+              'Branch opens the shared Sales Invoice',
+              'Click "Create" → "Inter Company Purchase Invoice"',
+              'System auto-creates draft in branch company',
+              'Invoice links to original HQ invoice',
+            ]}
+          />
+          <StepCard
+            title="Step 4: Submit in Branch Company"
             description="Open the draft in the branch company and complete the transfer."
             bullets={[
               'Switch to branch company context',
@@ -250,6 +309,21 @@ export default function BuyingPage() {
         </div>
       </Section>
       
+      <Section title="Returns & Refunds">
+        <Mermaid chart={buyingReturnsFlowchart} />
+        <p className="mb-4">
+          Returns and refunds in the Buying module allow you to return goods to suppliers and receive credit or refunds. 
+          This process uses Purchase Return and Debit Note documents to reverse the original purchase transaction.
+        </p>
+        
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+          <p className="text-blue-800 font-medium">🔄 Return Process Flow</p>
+          <p className="text-blue-700 text-sm mt-1">
+            Purchase Invoice → Purchase Return → Debit Note → Payment Refund
+          </p>
+        </div>
+      </Section>
+      
       <Section title="Key Takeaways">
         <ul className="space-y-3 text-gray-700">
           <li>✓ Always create Material Requests before purchasing</li>
@@ -259,6 +333,7 @@ export default function BuyingPage() {
           <li>✓ Maintain good vendor relationships for better pricing</li>
           <li>✓ Use Inter-Company Invoice workflow for multi-company stock transfers</li>
           <li>✓ Never use standard Stock Entry for inter-company transfers</li>
+          <li>✓ Use Purchase Return and Debit Note for supplier returns/refunds</li>
         </ul>
       </Section>
     </div>
