@@ -199,21 +199,6 @@ export default function BuyingPage() {
       
       <Mermaid chart={interCompanyFlowchart} />
       
-      <Section title="Returns & Refunds">
-        <Mermaid chart={buyingReturnsFlowchart} />
-        <p className="mb-4">
-          Returns and refunds in the Buying module allow you to return goods to suppliers and receive credit or refunds. 
-          This process uses Purchase Return and Debit Note documents to reverse the original purchase transaction.
-        </p>
-        
-        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
-          <p className="text-blue-800 font-medium">🔄 Return Process Flow</p>
-          <p className="text-blue-700 text-sm mt-1">
-            Purchase Invoice → Purchase Return → Debit Note → Payment Refund
-          </p>
-        </div>
-      </Section>
-      
       <Section title="Prerequisites">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StepCard
@@ -305,6 +290,21 @@ export default function BuyingPage() {
             If you cannot see the branch warehouse, you are likely in the wrong company context. 
             Use the "Create" button from the HQ Sales Invoice to automatically switch to the correct 
             branch company context and create the Inter-Company Purchase Invoice.
+          </p>
+        </div>
+      </Section>
+      
+      <Section title="Returns & Refunds">
+        <Mermaid chart={buyingReturnsFlowchart} />
+        <p className="mb-4">
+          Returns and refunds in the Buying module allow you to return goods to suppliers and receive credit or refunds. 
+          This process uses Purchase Return and Debit Note documents to reverse the original purchase transaction.
+        </p>
+        
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+          <p className="text-blue-800 font-medium">🔄 Return Process Flow</p>
+          <p className="text-blue-700 text-sm mt-1">
+            Purchase Invoice → Purchase Return → Debit Note → Payment Refund
           </p>
         </div>
       </Section>

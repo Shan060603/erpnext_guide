@@ -366,21 +366,6 @@ export default function SellingPage() {
       
       <Mermaid chart={interCompanyFlowchart} />
       
-      <Section title="Returns & Refunds">
-        <Mermaid chart={sellingReturnsFlowchart} />
-        <p className="mb-4">
-          Returns and refunds in the Selling module allow you to accept returned goods from customers and issue credit or refunds. 
-          This process uses Sales Return and Credit Note documents to reverse the original sales transaction.
-        </p>
-        
-        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
-          <p className="text-blue-800 font-medium">🔄 Return Process Flow</p>
-          <p className="text-blue-700 text-sm mt-1">
-            Sales Invoice → Sales Return → Credit Note → Payment Refund
-          </p>
-        </div>
-      </Section>
-      
       <Section title="Prerequisites">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StepCard
@@ -472,6 +457,21 @@ export default function SellingPage() {
             If you cannot see the branch warehouse, you are likely in the wrong company context. 
             Use the "Create" button from the HQ Sales Invoice to automatically switch to the correct 
             branch company context and create the Inter-Company Purchase Invoice.
+          </p>
+        </div>
+      </Section>
+      
+      <Section title="Returns & Refunds">
+        <Mermaid chart={sellingReturnsFlowchart} />
+        <p className="mb-4">
+          Returns and refunds in the Selling module allow you to accept returned goods from customers and issue credit or refunds. 
+          This process uses Sales Return and Credit Note documents to reverse the original sales transaction.
+        </p>
+        
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+          <p className="text-blue-800 font-medium">🔄 Return Process Flow</p>
+          <p className="text-blue-700 text-sm mt-1">
+            Sales Invoice → Sales Return → Credit Note → Payment Refund
           </p>
         </div>
       </Section>
