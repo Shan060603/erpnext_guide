@@ -143,6 +143,40 @@ const sellingReturnsFlowchart = `flowchart TD
   style L fill:#c8e6c9
   style H fill:#ffcdd2`
 
+const customerWalletFlowchart = `flowchart TD
+  %% ===========================
+  %% Customer Wallet / Advance Payments Flow
+  %% ===========================
+  A[Customer Makes Advance Payment] --> B[Create Payment Entry - Receive]
+  B --> C[Record Full Amount Swiped]
+  C --> D[Add Deduction - Merchant Fee 4.5%]
+  D --> E[Link to Bank Charges Account]
+  E --> F[Unallocated Amount = Net Cash]
+  F --> G[Customer Wallet Balance Updated]
+  
+  G --> H{Customer Makes Purchase?}
+  H -->|Yes| I[Create Sales Invoice]
+  I --> J[Click Get Advances Received]
+  J --> K[Apply Wallet Balance]
+  K --> L[Submit Invoice]
+  L --> M[Wallet Balance Reduced]
+  
+  H -->|No| N[Balance Remains in Wallet]
+  
+  M --> O[Check Customer Dashboard]
+  N --> O
+  O --> P{Negative Total Unpaid?}
+  P -->|Yes| Q[Customer Has Credit Available]
+  P -->|No| R[Customer Owes Money]
+  
+  style A fill:#e3f2fd
+  style B fill:#e8f5e9
+  style G fill:#fff3e0
+  style J fill:#fff3e0
+  style M fill:#c8e6c9
+  style Q fill:#c8e6c9
+  style R fill:#ffcdd2`
+
 export default function SellingPage() {
   return (
     <div>
@@ -477,6 +511,7 @@ export default function SellingPage() {
       </Section>
       
       <Section title="Customer Wallet (Advance Payments)">
+        <Mermaid chart={customerWalletFlowchart} />
         <p className="mb-4">
           The Customer Wallet feature allows you to manage advance payments and store credit for customers. 
           This is useful when customers pay upfront and use their balance over time for multiple purchases.
