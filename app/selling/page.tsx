@@ -177,6 +177,33 @@ const customerWalletFlowchart = `flowchart TD
   style Q fill:#c8e6c9
   style R fill:#ffcdd2`
 
+const partialPickupsFlowchart = `flowchart TD
+  %% Partial Pickups & Backorders Workflow
+  A[Customer Orders Solar Panels + Inverters] --> B[Create Sales Order - Master Order]
+  B --> C[Customer Pays Upfront]
+  C --> D{Stock Check}
+  D -->|Partial Available| E[Customer Pickup #1]
+  E --> F[Create Delivery Note from Sales Order]
+  F --> G["**Manually set qty=0** for out-of-stock items"]
+  G --> H[Submit - Status: Partially Delivered]
+  B --> I["**Items To Be Delivered Report** - Track backorder"]
+  H --> J[Customer Returns Later]
+  J --> K[Sales Order &rarr; Create &rarr; Delivery Note]
+  K --> L[Only undelivered items appear]
+  L --> M[Customer Pickup #2 - Complete]
+  M --> N[All items delivered - Status: To Invoice]
+  N --> O[Create Sales Invoice]
+  O --> P["**Get Advances Received** - Link all payments"]
+  P --> Q[Complete - Fully Paid]
+  
+  style B fill:#f3e8ff
+  style F fill:#fff3e0
+  style G fill:#ffcdd2,stroke:#d32f2f
+  style O fill:#e1f5fe
+  style P fill:#e8f5e9
+  style Q fill:#c8e6c9`
+
+
 export default function SellingPage() {
   return (
     <div>
@@ -606,8 +633,130 @@ export default function SellingPage() {
           </div>
         </div>
       </Section>
+
+      <Mermaid chart={partialPickupsFlowchart} />
+      
+      <Section title="Specialized Workflow: Partial Pickups & Backorders">
+        <p className="mb-6 text-lg">
+          <strong>Scenario:</strong> High-value retail/installation business (Solar Panels, Inverters). Customer orders multiple items, pays upfront, 
+          but some items out of stock. They pickup available items today, return later for backordered items.
+        </p>
+        
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-6 mb-8 rounded">
+          <h3 className="text-xl font-bold text-blue-800 mb-3">📌 Icon Key (UI Legend)</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div><span className="text-2xl">💰</span> <strong>Payment Entry</strong> (Money)</div>
+            <div><span className="text-2xl">📦</span> <strong>Delivery Note</strong> (Stock)</div>
+            <div><span className="text-2xl">📄</span> <strong>Sales Invoice</strong> (Accounting)</div>
+          </div>
+        </div>
+        
+        <h3 className="text-2xl font-bold mb-6 mt-12">Step 1: The Master Order (**Sales Order**)</h3>
+        <p className="mb-6 text-lg">
+          The <strong>Sales Order</strong> is the <em>Source of Truth</em>—lists everything promised to customer.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <StepCard
+            title="Create Sales Order"
+            description="Customer approves quotation → Sales Order."
+            bullets={[
+              'All items listed with full quantities',
+              'Customer pays **downpayment** via **Payment Entry** 💰',
+              'Status: **To Deliver**',
+              '"**Items To Be Delivered**" report shows backorders',
+            ]}
+          />
+        </div>
+
+        <h3 className="text-2xl font-bold mb-6 mt-12">Step 2: Partial Pickup (**Delivery Note**) 📦</h3>
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-8 rounded-lg">
+          <p className="text-yellow-800 font-bold text-lg mb-2">🚨 CRITICAL INSTRUCTION</p>
+          <p className="text-yellow-700">
+            From <strong>Sales Order</strong> click <strong>Create</strong> → <strong>Delivery Note</strong>. 
+            <strong>MANUALLY change Items table quantities to 0 for out-of-stock items today.</strong>
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <StepCard
+            title="Partial Delivery Note"
+            description="Customer takes available stock only."
+            bullets={[
+              'Copy from Sales Order (only ordered qty appears)',
+              '**Edit qty manually** (e.g., Solar Panels=5/10, Inverters=0)',
+              'Submit → Sales Order status = "**Partially Delivered**"',
+              'Stock deducted only for picked items',
+            ]}
+          />
+          <StepCard
+            title="Customer Returns Later"
+            description="Backorder handling."
+            bullets={[
+              'Go to original **Sales Order**',
+'&rarr; <strong>Create</strong> &rarr; <strong>Delivery Note</strong> (only remaining items)',
+              'Repeat process until "**To Invoice**"',
+            ]}
+          />
+        </div>
+
+        <h3 className="text-2xl font-bold mb-6 mt-12">Step 3: Financial Settlement 📄 💰</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <StepCard
+            title="Multiple Payment Entries"
+            description="Record payments on different dates."
+            bullets={[
+              'Downpayment today 💰',
+              'Balance on pickup #2 💰',
+              'Any date works—no invoice needed yet',
+            ]}
+          />
+          <StepCard
+            title="Single Sales Invoice"
+            description="Final billing after all deliveries."
+            bullets={[
+'From Sales Order: <strong>Create</strong> &rarr; <strong>Sales Invoice</strong> 📄',
+              'Click **Get Advances Received**',
+              'Links ALL prior **Payment Entries** automatically',
+              '**UNCHECK Update Stock** (already handled by DNs)',
+            ]}
+          />
+        </div>
+
+        <div className="bg-green-50 border-l-4 border-green-400 p-6 mb-8 rounded-lg">
+          <h3 className="text-xl font-bold text-green-800 mb-3">💡 Visual & UI Tips</h3>
+          <div className="space-y-3 text-green-700">
+            <p><strong>Troubleshooting:</strong> "No remaining items?" &rarr; Original <strong>Sales Order</strong> &rarr; <strong>Create</strong> &rarr; <strong>Delivery Note</strong>. ERPNext auto-filters undelivered items.</p>
+            <p><strong>Pro-Tip:</strong> Always check **Sales Order Items To Be Delivered** report—what you still owe customers.</p>
+          </div>
+        </div>
+
+        <div className="bg-indigo-50 border-l-4 border-indigo-400 p-6 mb-8 rounded-lg">
+          <h3 className="text-xl font-bold text-indigo-800 mb-3">✅ Why This Workflow Works</h3>
+          <ul className="text-indigo-700 space-y-2 list-disc list-inside">
+            <li><strong>Prevents Over-Invoicing:</strong> Delivery Notes control stock; Sales Invoices control money.</li>
+            <li><strong>Handles Backorders:</strong> No deleting from original order—track via status/reports.</li>
+            <li><strong>Multi-Payment Friendly:</strong> Record payments any date; "**Get Advances**" consolidates at invoicing.</li>
+          </ul>
+        </div>
+
+        <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg">
+          <h3 className="text-xl font-bold text-red-800 mb-4">🛑 Solareco Staff: Common Mistakes Checklist</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <ul className="space-y-2">
+              <li><label className="flex items-center"><input type="checkbox" className="mr-2" /> **Double-Deduction Error**: Delivery Note exists? **UNCHECK Update Stock** on Invoice.</label></li>
+              <li><label className="flex items-center"><input type="checkbox" className="mr-2" /> **Ghost Item Error**: **Edit quantities** on partials (5/10 → qty=5).</label></li>
+              <li><label className="flex items-center"><input type="checkbox" className="mr-2" /> **Floating Money Error**: Customer wallet? Click **Get Advances Received** on Invoice.</label></li>
+            </ul>
+            <ul className="space-y-2">
+              <li><label className="flex items-center"><input type="checkbox" className="mr-2" /> **Wrong Date Error**: Posting Date = sale date (March sales in March).</label></li>
+              <li><label className="flex items-center"><input type="checkbox" className="mr-2" /> **Missing Warehouse Error**: Verify **Warehouse** column filled.</label></li>
+            </ul>
+          </div>
+        </div>
+      </Section>
       
       <Section title="Key Takeaways">
+
         <ul className="space-y-3 text-gray-700">
           <li>✓ Always create Sales Orders from accepted Quotations</li>
           <li>✓ Use Delivery Notes to track actual shipments</li>
@@ -616,8 +765,12 @@ export default function SellingPage() {
           <li>✓ Set up automatic invoicing for recurring orders</li>
           <li>✓ Use Inter-Company Invoice workflow for multi-company stock transfers</li>
           <li>✓ Never use standard Stock Entry for inter-company transfers</li>
-          <li>✓ Use Sales Return and Credit Note for customer returns/refunds</li>
+        <li>✓ Use Sales Return and Credit Note for customer returns/refunds</li>
+          <li>✓ Use **Partially Delivered** Sales Orders + manual qty edits for backorders</li>
+          <li>✓ **Get Advances Received** consolidates multi-date payments on final Invoice</li>
+          <li>✓ Always verify **Items To Be Delivered** report before claiming order complete</li>
         </ul>
+
       </Section>
     </div>
   )

@@ -317,6 +317,15 @@ export default function AccountingPage() {
           />
         </div>
         
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-6 mb-6 rounded-lg">
+          <p className="text-blue-800 font-medium text-lg mb-2">🔗 Cross-reference: Partial Pickups Workflow</p>
+          <p className="text-blue-700">
+            See detailed <strong>Selling Module</strong> guide for handling backorders, partial deliveries, and multi-date 
+            advance payments with "**Get Advances Received**" on Sales Invoices. Perfect for high-value retail/installation.
+          </p>
+        </div>
+
+        
         <h4 className="text-lg font-medium text-gray-700 mb-3">Reports</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <StepCard
