@@ -68,6 +68,81 @@ const customerWalletFlowchart = `flowchart TD
   style Q fill:#c8e6c9
   style R fill:#ffcdd2`
 
+const accountingMastersFlowchart = `flowchart TD
+  A[Company] --> B[Fiscal Year]
+  B --> C[Accounting Period]
+  C --> D[Chart of Accounts]
+  D --> E[Accounts Settings]
+  E --> F[Accounting Dimension]
+  F --> G[Payment Term]
+  
+  style A fill:#e3f2fd
+  style D fill:#e8f5e9
+  style G fill:#fff3e0`
+
+const taxMastersFlowchart = `flowchart TD
+  A[Sales Taxes Template] --> B[Purchase Taxes Template]
+  B --> C[Item Tax Template]
+  C --> D[Tax Category]
+  D --> E[Tax Rule]
+  E --> F[Withholding Category]
+  
+  A --> G[Configure Rates]
+  B --> G
+  C --> G
+  G --> H[Apply to Invoices]
+  
+  style A fill:#e3f2fd
+  style H fill:#c8e6c9`
+
+const costCenterFlowchart = `flowchart TD
+  A[Chart of Cost Centers] --> B[Cost Center Types]
+  B --> C[Budget]
+  C --> D[Budget Distribution]
+  D --> E[Monthly Distribution]
+  E --> F[Allocate Costs]
+  F --> G[Track Variance]
+  G --> H[Budget Reports]
+  
+  style A fill:#e3f2fd
+  style C fill:#e8f5e9
+  style H fill:#c8e6c9`
+
+const multiCurrencyFlowchart = `flowchart TD
+  A[Currency] --> B[Currency Exchange]
+  B --> C[Exchange Rate Revaluation]
+  C --> D[Multi Currency Invoice]
+  D --> E{Gain Loss?}
+  E -->|Yes| F[Post Unrealized Gain/Loss]
+  E -->|No| G[No Adjustment]
+  F --> H[Final GL Entry]
+  G --> H
+  
+  style A fill:#e3f2fd
+  style D fill:#fff3e0
+  style H fill:#c8e6c9`
+
+const bankingFlowchart = `flowchart TD
+  A[Bank] --> B[Bank Account]
+  B --> C[Mode of Payment]
+  C --> D[Payment Entry]
+  D --> E[Bank Reconciliation]
+  E --> F[Reconciliation Report]
+  F --> G[Bank Statement]
+  
+  style A fill:#e3f2fd
+  style E fill:#e8f5e9
+  style G fill:#c8e6c9`
+
+const shareManagementFlowchart = `flowchart TD
+  A[Shareholder] --> B[Share Transfer]
+  B --> C[Share Ledger]
+  C --> D[Share Balance]
+  D --> E[Share Certificate]
+  
+  style A fill:#e3f2fd
+  style D fill:#c8e6c9`
+
 export default function AccountingPage() {
   return (
     <div>
@@ -673,6 +748,380 @@ export default function AccountingPage() {
         </div>
       </Section>
       
+      <Section title="Accounting Masters">
+        <p className="mb-4">
+          Core accounting setup and master data configurations.
+        </p>
+        <Mermaid chart={accountingMastersFlowchart} />
+        
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Organization Setup</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <StepCard
+            title="Company"
+            description="Define your business entities."
+            bullets={[
+              'Create company master',
+              'Set default currency',
+              'Configure fiscal year',
+              'Set company address',
+              'Define default accounts',
+            ]}
+          />
+          <StepCard
+            title="Fiscal Year"
+            description="Define accounting periods."
+            bullets={[
+              'Create fiscal year',
+              'Set start and end dates',
+              'Define accounting periods',
+              'Enable auto-close',
+              'Configure period closing',
+            ]}
+          />
+        </div>
+
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Chart of Accounts</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <StepCard
+            title="Chart of Accounts"
+            description="Account structure and hierarchy."
+            bullets={[
+              'Create account tree structure',
+              'Define account types',
+              'Set root accounts (Asset, Liability, Income, Expense)',
+              'Configure account codes',
+              'Import/export chart of accounts',
+            ]}
+          />
+          <StepCard
+            title="Accounts Settings"
+            description="Configure accounting behavior."
+            bullets={[
+              'Set default currency',
+              'Enable book asset depreciation',
+              'Configure credit limit',
+              'Set payment terms',
+              'Enable perpetual inventory',
+            ]}
+          />
+          <StepCard
+            title="Accounting Dimension"
+            description="Track by segments."
+            bullets={[
+              'Create dimension (Branch, Department, Project)',
+              'Set dimension filters',
+              'Apply to transactions',
+              'Report by dimension',
+            ]}
+          />
+          <StepCard
+            title="Payment Term"
+            description="Define payment schedules."
+            bullets={[
+              'Create payment terms (Net 30, 60, 90)',
+              'Set due date calculation',
+              'Define partial payments',
+              'Configure early payment discounts',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="Tax Masters">
+        <p className="mb-4">
+          Configure all tax types and rates.
+        </p>
+        <Mermaid chart={taxMastersFlowchart} />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <StepCard
+            title="Sales Taxes and Charges Template"
+            description="Taxes applied to sales."
+            bullets={[
+              'Create tax template',
+              'Add tax rates and accounts',
+              'Set tax included/excluded',
+              'Define tax rules',
+              'Apply to customers',
+            ]}
+          />
+          <StepCard
+            title="Purchase Taxes and Charges Template"
+            description="Taxes applied to purchases."
+            bullets={[
+              'Create purchase tax template',
+              'Add input tax rates',
+              'Set tax recoverable',
+              'Link to expense accounts',
+              'Configure tax exemption',
+            ]}
+          />
+          <StepCard
+            title="Item Tax Template"
+            description="Item-specific taxes."
+            bullets={[
+              'Create item tax template',
+              'Set specific tax rates',
+              'Apply to items',
+              'Define tax exemptions',
+              'Override default rates',
+            ]}
+          />
+          <StepCard
+            title="Tax Category"
+            description="Group items for tax."
+            bullets={[
+              'Create tax categories',
+              'Assign tax rules',
+              'Set exempt items',
+              'Configure composite rates',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="Cost Center & Budgeting">
+        <p className="mb-4">
+          Track costs and manage budgets.
+        </p>
+        <Mermaid chart={costCenterFlowchart} />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <StepCard
+            title="Chart of Cost Centers"
+            description="Organize cost tracking."
+            bullets={[
+              'Create cost center tree',
+              'Set cost center types',
+              'Link to departments',
+              'Apply to transactions',
+              'Report by cost center',
+            ]}
+          />
+          <StepCard
+            title="Budget"
+            description="Plan and control spending."
+            bullets={[
+              'Create budget per cost center',
+              'Set annual budget amounts',
+              'Define budget distribution',
+              'Enable budget alerts',
+              'Track variance',
+            ]}
+          />
+          <StepCard
+            title="Cost Center Allocation"
+            description="Allocate shared costs."
+            bullets={[
+              'Set allocation method',
+              'Define allocation basis',
+              'Configure periodic splits',
+              'Track allocated costs',
+            ]}
+          />
+          <StepCard
+            title="Monthly Distribution"
+            description="Distribute budget over months."
+            bullets={[
+              'Define distribution pattern',
+              'Set evenly or custom distribution',
+              'Apply to annual budgets',
+              'Override for specific months',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="Multi Currency">
+        <p className="mb-4">
+          Handle transactions in multiple currencies.
+        </p>
+        <Mermaid chart={multiCurrencyFlowchart} />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <StepCard
+            title="Currency"
+            description="Define currencies."
+            bullets={[
+              'Create currency code',
+              'Set symbol and notation',
+              'Configure decimal places',
+              'Set number format',
+            ]}
+          />
+          <StepCard
+            title="Currency Exchange"
+            description="Set exchange rates."
+            bullets={[
+              'Create exchange rate pairs',
+              'Set buy/sell rates',
+              'Define effective date',
+              'Auto-update via API',
+            ]}
+          />
+          <StepCard
+            title="Exchange Rate Revaluation"
+            description="Adjust foreign currency values."
+            bullets={[
+              'Run revaluation process',
+              'Post unrealized gain/loss',
+              'Track currency exposure',
+              'Generate revaluation report',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="Banking">
+        <p className="mb-4">
+          Bank management and reconciliation.
+        </p>
+        <Mermaid chart={bankingFlowchart} />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <StepCard
+            title="Bank"
+            description="Manage bank masters."
+            bullets={[
+              'Create bank record',
+              'Set bank address',
+              'Define bank branches',
+              'Configure Swift codes',
+            ]}
+          />
+          <StepCard
+            title="Bank Account"
+            description="Track bank accounts."
+            bullets={[
+              'Link bank to company',
+              'Set account number',
+              'Configure account type',
+              'Set default currency',
+            ]}
+          />
+          <StepCard
+            title="Bank Reconciliation"
+            description="Match bank statements."
+            bullets={[
+              'Import bank statement',
+              'Match transactions',
+              'Identify discrepancies',
+              'Reconcile differences',
+              'Generate reconciliation report',
+            ]}
+          />
+          <StepCard
+            title="Mode of Payment"
+            description="Define payment methods."
+            bullets={[
+              'Create payment mode (Cash, Check, Transfer)',
+              'Link to bank account',
+              'Set payment gateway',
+              'Configure validation rules',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="Opening & Closing">
+        <p className="mb-4">
+          Tools for opening balances and period closing.
+        </p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <StepCard
+            title="Opening Invoice Creation Tool"
+            description="Create opening invoices."
+            bullets={[
+              'Import opening balances',
+              'Set customer/supplier balances',
+              'Create opening entries',
+              'Verify opening trial balance',
+            ]}
+          />
+          <StepCard
+            title="Chart of Accounts Importer"
+            description="Import chart of accounts."
+            bullets={[
+              'Download template',
+              'Import from Excel',
+              'Verify account structure',
+              'Link to parent accounts',
+            ]}
+          />
+          <StepCard
+            title="Period Closing Voucher"
+            description="Close accounting period."
+            bullets={[
+              'Run period close process',
+              'Lock posted transactions',
+              'Generate closing report',
+              'Prepare for next period',
+            ]}
+          />
+          <StepCard
+            title="Terms and Conditions"
+            description="Define standard terms."
+            bullets={[
+              'Create T&C templates',
+              'Apply to transactions',
+              'Define payment terms',
+              'Set warranty periods',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="Share Management">
+        <p className="mb-4">
+          Track company shares and shareholders.
+        </p>
+        <Mermaid chart={shareManagementFlowchart} />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <StepCard
+            title="Shareholder"
+            description="Track shareholders."
+            bullets={[
+              'Create shareholder records',
+              'Track share allocations',
+              'Set shareholder types',
+              'Maintain contact info',
+            ]}
+          />
+          <StepCard
+            title="Share Transfer"
+            description="Record share transfers."
+            bullets={[
+              'Create transfer document',
+              'Set share quantity',
+              'Transfer between shareholders',
+              'Track transfer date',
+            ]}
+          />
+          <StepCard
+            title="Share Ledger"
+            description="Track all share transactions."
+            bullets={[
+              'View all transfers',
+              'Track share movements',
+              'Generate ledger report',
+              'Verify share balance',
+            ]}
+          />
+          <StepCard
+            title="Share Balance"
+            description="Current share holdings."
+            bullets={[
+              'View per shareholder',
+              'Track issued shares',
+              'Verify total shares',
+              'Generate balance report',
+            ]}
+          />
+        </div>
+      </Section>
+
       <Section title="Key Takeaways">
         <ul className="space-y-3 text-gray-700">
           <li>✓ Configure chart of accounts before processing transactions</li>
@@ -683,6 +1132,9 @@ export default function AccountingPage() {
           <li>✓ Monitor accounts receivable aging to improve cash flow</li>
           <li>✓ Use dunning to follow up on overdue payments</li>
           <li>✓ Track profitability by product, customer, and territory</li>
+          <li>✓ Set up tax templates before creating invoices</li>
+          <li>✓ Configure budgets to control spending</li>
+          <li>✓ Set up multi-currency if dealing with foreign suppliers</li>
         </ul>
       </Section>
     </div>

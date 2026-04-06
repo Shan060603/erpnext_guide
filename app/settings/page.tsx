@@ -77,6 +77,284 @@ export default function SettingsPage() {
           />
         </div>
       </Section>
+
+      <Section title="Customization Tools">
+        <p className="mb-6">
+          ERPNext v15 provides powerful customization tools to tailor the system to your business needs.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StepCard
+            title="Custom Field Builder"
+            description="Add fields to any DocType."
+            bullets={[
+              'Go to Custom Field DocType',
+              'Select the target DocType (Item, Customer, etc.)',
+              'Add new field with Label and Field Type',
+              'Configure field properties and permissions',
+              'Set as mandatory or in list view',
+            ]}
+          />
+          <StepCard
+            title="Custom Script"
+            description="Add custom logic with JavaScript."
+            bullets={[
+              'Customize via Custom Script DocType',
+              'Write JavaScript for form events',
+              'Trigger on load, save, validate',
+              'Add client-side validations',
+              'Modify form behavior dynamically',
+            ]}
+          />
+          <StepCard
+            title="DocType Builder"
+            description="Create new data models."
+            bullets={[
+              'Create new DocType from scratch',
+              'Define fields and field types',
+              'Set permissions and workflow',
+              'Add list and form views',
+              'Link to other DocTypes',
+            ]}
+          />
+          <StepCard
+            title="Print Format Builder"
+            description="Design print layouts."
+            bullets={[
+              'Go to Print Format DocType',
+              'Use drag-and-drop builder',
+              'Add logo, header, footer',
+              'Configure table layouts',
+              'Link to DocTypes',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="Automation Tools">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StepCard
+            title="Workflow Builder"
+            description="Create approval workflows."
+            bullets={[
+              'Go to Workflow DocType',
+              'Define workflow states',
+              'Add transition rules',
+              'Set role-based permissions',
+              'Configure email notifications',
+            ]}
+          />
+          <StepCard
+            title="Automation Settings"
+            description="Schedule automated tasks."
+            bullets={[
+              'Create Scheduled Job',
+              'Set frequency (daily, weekly)',
+              'Define method to run',
+              'Configure conditions',
+              'Monitor via Error Log',
+            ]}
+          />
+          <StepCard
+            title="Email Digest"
+            description="Schedule report emails."
+            bullets={[
+              'Create Email Digest',
+              'Select reports to include',
+              'Set frequency (daily/weekly)',
+              'Add recipients',
+              'Customize email template',
+            ]}
+          />
+          <StepCard
+            title="Web Forms"
+            description="Public-facing forms."
+            bullets={[
+              'Create Web Form DocType',
+              'Configure fields and layout',
+              'Set permissions',
+              'Customize success message',
+              'Link to backend DocType',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="File & Document Management">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StepCard
+            title="File Manager"
+            description="Manage documents and files."
+            bullets={[
+              'Upload files to documents',
+              'Organization-wide files',
+              'Create folders hierarchy',
+              'Share files with users',
+              'Set file restrictions',
+            ]}
+          />
+          <StepCard
+            title="Document Versioning"
+            description="Track document changes."
+            bullets={[
+              'Enable in DocType settings',
+              'View version history',
+              'Compare versions',
+              'Restore previous versions',
+              'Configure auto-versioning',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="API & Integration">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StepCard
+            title="REST API"
+            description="External integrations."
+            bullets={[
+              'Generate API Keys',
+              'Use Resource APIs',
+              'Pass credentials header',
+              'Rate limiting apply',
+              'Test with Postman',
+            ]}
+          />
+          <StepCard
+            title="Webhook"
+            description="Push data externally."
+            bullets={[
+              'Create Webhook DocType',
+              'Set URL and method',
+              'Configure payload',
+              'Set trigger events',
+              'Monitor via Error Log',
+            ]}
+          />
+          <StepCard
+            title="OAuth"
+            description="SSO integrations."
+            bullets={[
+              'Configure OAuth Provider',
+              'Set client credentials',
+              'Configure redirect URIs',
+              'Test authentication',
+              'Map user fields',
+            ]}
+          />
+          <StepCard
+            title="Data Export"
+            description="Export data programmatically."
+            bullets={[
+              'Use Data Export Tool',
+              'Select DocType',
+              'Choose fields',
+              'Export to CSV/Excel',
+              'Schedule automated exports',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="Calendar & Tasks">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StepCard
+            title="Calendar"
+            description="Schedule events."
+            bullets={[
+              'Create Calendar Event',
+              'Add attendees',
+              'Set reminders',
+              'Sync with email',
+              'Recurring events',
+            ]}
+          />
+          <StepCard
+            title="To Do"
+            description="Task management."
+            bullets={[
+              'Create To Do item',
+              'Assign to user',
+              'Set priority',
+              'Set due date',
+              'Track completion',
+            ]}
+          />
+          <StepCard
+            title="Note"
+            description="Team notes."
+            bullets={[
+              'Create Note',
+              'Add content',
+              'Share with users',
+              'Set public/private',
+              'Organize in folders',
+            ]}
+          />
+          <StepCard
+            title="Assignment Rule"
+            description="Auto-assign tasks."
+            bullets={[
+              'Create Assignment Rule',
+              'Set conditions',
+              'Define round-robin',
+              'Configure assignment logic',
+              'Link to DocTypes',
+            ]}
+          />
+        </div>
+      </Section>
+
+      <Section title="Portal Management">
+        <p className="mb-6">
+          ERPNext Portal allows customers and suppliers to access their documents online.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StepCard
+            title="Portal Settings"
+            description="Configure portal access."
+            bullets={[
+              'Enable Portal in System Settings',
+              'Set default portal pages',
+              'Configure branding',
+              'Enable self-signup',
+              'Set password policy',
+            ]}
+          />
+          <StepCard
+            title="Portal Users"
+            description="Manage portal access."
+            bullets={[
+              'Create Customer Portal User',
+              'Link to Customer',
+              'Set permissions',
+              'View own documents',
+              'Request password reset',
+            ]}
+          />
+          <StepCard
+            title="Customer Portal"
+            description="Customer-facing features."
+            bullets={[
+              'View Invoices',
+              'View Payments',
+              'Create Sales Order',
+              'Download Statements',
+              'Submit Feedback',
+            ]}
+          />
+          <StepCard
+            title="Supplier Portal"
+            description="Supplier-facing features."
+            bullets={[
+              'View Purchase Orders',
+              'Submit Purchase Receipt',
+              'View Payments',
+              'Submit Quotation',
+              'Download Statements',
+            ]}
+          />
+        </div>
+      </Section>
       
       <Section title="Data Import Tutorial">
         <p className="mb-6">
