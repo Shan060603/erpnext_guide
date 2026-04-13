@@ -1,6 +1,21 @@
 import Mermaid from '@/components/Mermaid'
 import Section from '@/components/Section'
 import StepCard from '@/components/StepCard'
+import Link from 'next/link'
+
+const sops = [
+  {
+    title: 'Opening Sales Invoice + PDC Linkage',
+    description:
+      'Migrate old receivables as opening invoices and link post-dated checks (PDC) to the exact invoice.',
+    bullets: [
+      'Phase 1: Opening Invoice Creation Tool (no revenue impact)',
+      'Phase 2: Payment Entry linked to opening invoice (PDC tracking)',
+      'Account flow: Temporary Opening → AR → PDC Receivable → Bank',
+    ],
+    href: '/accounting/opening-invoice-pdc',
+  },
+]
 
 const payablesFlowchart = `flowchart TD
   A[Purchase Invoice] --> B[Supplier]
@@ -154,6 +169,47 @@ export default function AccountingPage() {
           general ledger entries, and financial reporting. It integrates with Selling and Buying modules 
           to automatically create journal entries from invoices and payments, ensuring accurate financial records.
         </p>
+      </Section>
+
+      <Section title="SOPs">
+        <div className="grid grid-cols-1 gap-6">
+          {sops.map((sop) => (
+            <div
+              key={sop.href}
+              className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg hover:border-primary-200 transition-all duration-300 flex flex-col"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{sop.title}</h3>
+              <p className="text-gray-600 mb-4">{sop.description}</p>
+              <ul className="space-y-2 mb-5">
+                {sop.bullets.map((bullet) => (
+                  <li key={bullet} className="flex items-start text-sm text-gray-600">
+                    <span className="inline-block w-2 h-2 rounded-full bg-primary-500 mt-2 mr-3 flex-shrink-0" />
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={sop.href}
+                className="mt-auto w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-sky-600 text-white font-semibold shadow-sm hover:bg-sky-700 hover:shadow transition focus:outline-none focus:ring-2 focus:ring-sky-300"
+                aria-label={`Open SOP: ${sop.title}`}
+              >
+                View SOP
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 10a1 1 0 0 1 1-1h9.586L10.293 5.707a1 1 0 1 1 1.414-1.414l5 5a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414-1.414L13.586 11H4a1 1 0 0 1-1-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </Link>
+            </div>
+          ))}
+        </div>
       </Section>
       
       <Section title="Payables">

@@ -19,6 +19,17 @@ const incentivesFlowchart = `flowchart TD
   A[Additional Salary] --> B[Employee Incentive]
   B --> C[Retention Bonus]`
 
+const employeeLoanDeductionFlowchart = `flowchart TD
+  A["Employee Loan Approved"] --> B["Disbursement"]
+  B --> C["Repayment Schedule (Installments)"]
+  C --> D["Deduction Salary Component (Loan Deduction)"]
+  D --> E["Salary Structure (Variable Deduction)"]
+  E --> F["Each Payroll Period: Additional Salary (Deduction) = Installment"]
+  F --> G["Payroll Entry"]
+  G --> H["Salary Slips (Deduction Applied)"]
+  H --> I["Salary Payment"]
+  I --> J["Loan Balance Updates / Close"]`
+
 const accountingFlowchart = `flowchart TD
   A[Chart of Accounts] --> B[Chart of Cost Centers]
   B --> C[Journal Entry]`
@@ -97,6 +108,16 @@ export default function PayrollPage() {
         <Mermaid chart={incentivesFlowchart} />
         <p>
           Manage additional salary, employee incentives, and retention bonuses.
+        </p>
+      </Section>
+
+      <Section title="Employee Loans & Salary Deductions">
+        <Mermaid chart={employeeLoanDeductionFlowchart} />
+        <p>
+          If your company lends money to employees, collect repayments by adding a dedicated <strong>Deduction</strong>{' '}
+          salary component (e.g., “Loan Deduction”) to the salary structure, then post the installment due each
+          payroll period (commonly via <strong>Additional Salary</strong> as a deduction). This ensures the
+          repayment is reflected directly on the Salary Slip and net pay.
         </p>
       </Section>
       
@@ -181,6 +202,16 @@ export default function PayrollPage() {
               'Auto-post to accounting ledgers',
               'Generate bank remittance files',
               'Reconcile with bank statements',
+            ]}
+          />
+          <StepCard
+            title="Employee Loan Deductions"
+            description="Deduct loan installments automatically via payroll."
+            bullets={[
+              'Create a Deduction Salary Component (Variable) for loan repayments',
+              'Add it to the Salary Structure under Deductions',
+              'Create Additional Salary (Deduction) each period for the installment due',
+              'Generate Salary Slips and verify the deduction before submitting',
             ]}
           />
         </div>

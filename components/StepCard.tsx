@@ -6,7 +6,7 @@ interface StepCardProps {
 
 export default function StepCard({ title, description, bullets }: StepCardProps) {
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg hover:border-primary-200 transition-all duration-300">
+    <div className="print-block bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg hover:border-primary-200 transition-all duration-300">
       <h3 className="text-lg font-semibold text-gray-900 mb-3">{title}</h3>
       <p className="text-gray-600 mb-4">{description}</p>
       {bullets && bullets.length > 0 && (

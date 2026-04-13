@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Sidebar from '@/components/Sidebar'
+import PrintPdfButton from '@/components/PrintPdfButton'
 
 export const metadata: Metadata = {
   title: 'ERPNext User Training Manual',
@@ -22,6 +23,13 @@ export default function RootLayout({
               {children}
             </div>
           </main>
+        </div>
+
+        <div className="no-print fixed bottom-6 right-6 z-50">
+          <PrintPdfButton
+            label="PDF"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-gray-900 text-white font-semibold shadow-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-300"
+          />
         </div>
       </body>
     </html>

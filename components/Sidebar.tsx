@@ -11,6 +11,7 @@ const navItems = [
   { name: 'Buying', href: '/buying' },
   { name: 'Inventory', href: '/inventory' },
   { name: 'Accounting', href: '/accounting' },
+  { name: 'Lending', href: '/lending' },
   { name: 'Project', href: '/project' },
   { name: 'Service', href: '/service' },
   { name: 'HR', href: '/hr' },
@@ -28,7 +29,7 @@ export default function Sidebar() {
   return (
     <>
       {/* Sidebar */}
-      <aside className={`fixed left-0 top-0 h-screen bg-white border-r border-gray-200 shadow-sm overflow-y-auto z-40 transition-all duration-300 ${isOpen ? 'w-64' : 'w-0 overflow-hidden'}`}>
+      <aside className={`no-print fixed left-0 top-0 h-screen bg-white border-r border-gray-200 shadow-sm overflow-y-auto z-40 transition-all duration-300 ${isOpen ? 'w-64' : 'w-0 overflow-hidden'}`}>
         {/* Header with toggle button */}
         <div className="p-4 border-b border-gray-100 flex items-center justify-between">
           <div>
@@ -81,7 +82,7 @@ export default function Sidebar() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md"
+          className="no-print fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md"
           aria-label="Expand sidebar"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +92,7 @@ export default function Sidebar() {
       )}
 
       {/* Spacer element - adjusts based on sidebar state */}
-      <div className={`fixed left-0 top-0 h-screen transition-all duration-300 ${isOpen ? 'w-64' : 'w-0'}`} />
+      <div className={`no-print fixed left-0 top-0 h-screen transition-all duration-300 ${isOpen ? 'w-64' : 'w-0'}`} />
     </>
   )
 }

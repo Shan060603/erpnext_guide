@@ -15,3 +15,47 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  .print-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .mermaid-block {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .mermaid-block svg {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 260mm !important;
+  }
+}
