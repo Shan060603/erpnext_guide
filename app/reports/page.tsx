@@ -66,6 +66,17 @@ export default function ReportsPage() {
             ]}
           />
           <StepCard
+            title="Support Reports"
+            description="Track service performance and SLAs."
+            bullets={[
+              'First Response Time Analysis',
+              'SLA Compliance Dashboard',
+              'Technician Performance',
+              'Issue Aging Report',
+              'Maintenance Schedule Compliance',
+            ]}
+          />
+          <StepCard
             title="Custom Reports"
             description="Build custom reports and dashboards."
             bullets={[

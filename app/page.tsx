@@ -40,7 +40,7 @@ const modules = [
   {
     name: 'Service',
     href: '/service',
-    description: 'Deliver after-sales support and maintenance',
+    description: 'Manage support issues, maintenance, SLAs, and warranty claims',
     icon: '🔧',
   },
   {
