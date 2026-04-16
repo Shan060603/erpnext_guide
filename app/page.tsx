@@ -32,12 +32,6 @@ const modules = [
     icon: '📊',
   },
   {
-    name: 'Lending',
-    href: '/lending',
-    description: 'Manage loan applications, disbursement, and repayments',
-    icon: '🏦',
-  },
-  {
     name: 'Project',
     href: '/project',
     description: 'Plan and execute projects with tasks and timesheets',

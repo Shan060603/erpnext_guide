@@ -11,7 +11,6 @@ const navItems = [
   { name: 'Buying', href: '/buying' },
   { name: 'Inventory', href: '/inventory' },
   { name: 'Accounting', href: '/accounting' },
-  { name: 'Lending', href: '/lending' },
   { name: 'Project', href: '/project' },
   { name: 'Service', href: '/service' },
   { name: 'HR', href: '/hr' },
