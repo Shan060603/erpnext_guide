@@ -6,6 +6,15 @@ import { useState } from 'react'
 
 const navItems = [
   { name: 'Dashboard', href: '/' },
+  { name: '─────────────', href: '#', disabled: true },
+  { name: '📖 Foundations', href: '#', disabled: true },
+  { name: 'Introduction', href: '/introduction' },
+  { name: 'Organization Setup', href: '/organization-setup' },
+  { name: 'HR Finance', href: '/hr-finance' },
+  { name: 'Cross-Module Integration', href: '/cross-module-integration' },
+  { name: 'Implementation Strategy', href: '/implementation-strategy' },
+  { name: '─────────────', href: '#', disabled: true },
+  { name: '📦 Core Modules', href: '#', disabled: true },
   { name: 'CRM', href: '/crm' },
   { name: 'Selling', href: '/selling' },
   { name: 'Buying', href: '/buying' },
@@ -28,9 +37,9 @@ export default function Sidebar() {
   return (
     <>
       {/* Sidebar */}
-      <aside className={`no-print fixed left-0 top-0 h-screen bg-white border-r border-gray-200 shadow-sm overflow-y-auto z-40 transition-all duration-300 ${isOpen ? 'w-64' : 'w-0 overflow-hidden'}`}>
+      <aside className={`no-print fixed left-0 top-0 h-screen bg-white border-r border-gray-200 shadow-sm overflow-y-auto z-40 transition-all duration-300 flex flex-col ${isOpen ? 'w-64' : 'w-0 overflow-hidden'}`}>
         {/* Header with toggle button */}
-        <div className="p-4 border-b border-gray-100 flex items-center justify-between">
+        <div className="p-4 border-b border-gray-100 flex items-center justify-between flex-shrink-0">
           <div>
             <h1 className="text-xl font-bold text-gray-900">
               ERPNext Manual
@@ -48,29 +57,36 @@ export default function Sidebar() {
           </button>
         </div>
         
-        <nav className="p-4">
+        <nav className="p-4 flex-1 overflow-y-auto">
           <ul className="space-y-1">
-            {navItems.map((item) => {
+            {navItems.map((item, index) => {
               const isActive = pathname === item.href
+              const isDisabled = item.disabled || item.href === '#'
               return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                      isActive
-                        ? 'bg-primary-50 text-primary-700 border-l-4 border-primary-500'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
+                <li key={`nav-${index}-${item.href}`}>
+                  {isDisabled ? (
+                    <div className="px-4 py-2.5 text-sm font-semibold text-gray-500 cursor-default">
+                      {item.name}
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                        isActive
+                          ? 'bg-primary-50 text-primary-700 border-l-4 border-primary-500'
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  )}
                 </li>
               )
             })}
           </ul>
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100">
+        <div className="p-4 border-t border-gray-100 flex-shrink-0">
           <p className="text-xs text-gray-400 text-center">
             v1.0 • ERPNext Documentation
           </p>
