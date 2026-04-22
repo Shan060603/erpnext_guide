@@ -31,6 +31,12 @@ const foundationalSections = [
     description: 'Step-by-step go-live roadmap and best practices',
     icon: '🚀',
   },
+  {
+    name: 'ERP Simulation',
+    href: '/simulation',
+    description: 'Run the 7-day CPA-style ERPNext master scenario and checklist',
+    icon: '🧠',
+  },
 ]
 
 const modules = [

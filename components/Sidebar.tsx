@@ -13,6 +13,7 @@ const navItems = [
   { name: 'HR Finance', href: '/hr-finance' },
   { name: 'Cross-Module Integration', href: '/cross-module-integration' },
   { name: 'Implementation Strategy', href: '/implementation-strategy' },
+  { name: 'ERP Simulation', href: '/simulation' },
   { name: '─────────────', href: '#', disabled: true },
   { name: '📦 Core Modules', href: '#', disabled: true },
   { name: 'CRM', href: '/crm' },
