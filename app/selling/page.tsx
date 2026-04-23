@@ -313,6 +313,7 @@ export default function SellingPage() {
               'Set Item Group (e.g., "Promotional Items")',
               '⚠️ Set "Is Stock Item" = No (CRITICAL)',
               'Set "Is Sales Item" = Yes',
+              'Set an Income Account because the parent is a sales item',
               'Set selling price for the bundle',
             ]}
           />
@@ -322,6 +323,7 @@ export default function SellingPage() {
             bullets={[
               'Each component must be a stockable item',
               'Set "Is Stock Item" = Yes for each child',
+              'If a child is sold, set an Income Account; if it is an expense item, set an Expense Account',
               'Ensure child items have stock levels',
               'Set individual selling prices if needed',
             ]}
@@ -358,6 +360,7 @@ export default function SellingPage() {
             bullets={[
               'Is Stock Item = No (MUST be unchecked)',
               'Is Sales Item = Yes',
+              'Income Account must be set for this sales item',
               'Has Variants = No',
               'Include Item in Manufacturing = No',
               'Set appropriate Item Group',
@@ -370,6 +373,7 @@ export default function SellingPage() {
             bullets={[
               'Is Stock Item = Yes (MUST be checked)',
               'Is Sales Item = Yes (optional)',
+              'Set Income Account for sales items and Expense Account for expense items',
               'Maintain stock levels in warehouses',
               'Set default warehouse for picking',
               'Can have variants if needed',

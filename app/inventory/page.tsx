@@ -81,6 +81,7 @@ export default function InventoryPage() {
             bullets={[
               'Define item code, name, and description',
               'Set default warehouse and UOM',
+              'Set Income Account for sales items and Expense Account for expense items',
               'Configure valuation methods (FIFO, Moving Average, Weighted Average)',
               'Enable serial number and batch tracking',
             ]}

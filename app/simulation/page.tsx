@@ -101,12 +101,13 @@ const daySummaries = [
       'Create Item Groups for Raw Materials, Finished Goods, Services, and Expenses.',
       'Create UOMs for Nos, Kg, Hour, and optional Lot.',
       'Create all 40 items: 5 raw materials, 5 finished goods, 5 service items, and 25 non-stock expense items.',
+      'Assign item accounting properly: sales items need an Income Account and expense items need an Expense Account.',
       'Create Standard Selling and Standard Buying price lists in PHP and set them as default.',
       'Assign item prices so transactions pull from price lists rather than manual amounts.',
       'Enter Company A opening stock through Stock Entry (Opening) only for raw materials totaling about ₱268,000.',
     ],
     checks: [
-      'Item types, UOM, and default accounts are correct.',
+      'Item types, UOM, and default accounts are correct, including Income Account for sales items and Expense Account for expense items.',
       'Opening stock is in the correct warehouse with no VAT included.',
       'Stock Balance report shows correct quantities and no negative stock.',
     ],
@@ -243,7 +244,7 @@ const checklist = [
     items: [
       'Create Item Groups for Raw Materials, Finished Goods, Services, and Expenses.',
       'Create UOMs for Nos, Kg, and Hour.',
-      'Create all 40 items with correct type, UOM, and accounts.',
+      'Create all 40 items with correct type, UOM, and accounts, including Expense Account for expense items and Income Account for sales items.',
       'Create Standard Selling and Standard Buying price lists and set them as default.',
       'Assign RM buying prices, FG buying and selling prices, and service selling prices.',
       'Enter Company A opening stock through Stock Entry (Opening) only.',
@@ -1025,7 +1026,8 @@ export default function SimulationPage() {
             correct expense accounts. Your prompt confirms that the full list is
             already correct, but it does not enumerate the 25 item names. This
             page preserves that requirement without inventing unsupplied item
-            names.
+            names. For item setup, assign an `Expense Account` to expense items
+            and an `Income Account` to sales items.
           </Callout>
 
           <div className="mb-6">
@@ -1036,6 +1038,8 @@ export default function SimulationPage() {
               <li>Raw Materials use buying price only.</li>
               <li>Finished Goods use both buying and selling prices.</li>
               <li>Service Items use selling prices only.</li>
+              <li>Expense Items: set an Expense Account.</li>
+              <li>Sales Items: set an Income Account.</li>
               <li>Finished Goods: Income = Sales Revenue, Expense = Cost of Goods Sold.</li>
               <li>Raw Materials: Inventory posting must point to an asset account, not an expense account.</li>
               <li>Services: Income = Service Revenue.</li>

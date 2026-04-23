@@ -108,6 +108,7 @@ export default function BuyingPage() {
             bullets={[
               'Create requests from production plans or stock alerts',
               'Specify items, quantities, and required dates',
+              'For expense items, make sure an Expense Account is set on the item master',
               'Set requested by department and purpose',
               'Submit for approval to procurement team',
             ]}
@@ -138,6 +139,7 @@ export default function BuyingPage() {
             bullets={[
               'Create PO from supplier quotation or directly',
               'Include items, prices, delivery terms',
+              'Confirm item accounting is correct: sales items use Income Account and expense items use Expense Account',
               'Set payment terms and validity',
               'Send PO to supplier for confirmation',
             ]}
