@@ -8,42 +8,32 @@ const sellingFlowchart = `flowchart TD
   %% ===========================
 
   %% ===========================
+  %% CRM Flow
+  %% ===========================
+  A[Lead] --> B[Customer]
+  B --> Q[Quotation]
+
+  %% ===========================
   %% Sales Flow (Standard)
   %% ===========================
-  Q[Quotation] --> R{Customer Approves?}
+  Q --> R{Customer Approves?}
   R -->|No| QR[Revise Quotation]
   QR --> Q
   R -->|Yes| S[Sales Order]
 
-  S --> T{Stock Available?}
-  T -->|No| U[Trigger Purchase / Production]
-  T -->|Yes| V[Delivery Note]
+  S --> T{Delivery Required?}
+  T -->|No| W["Sales Invoice (Update Stock)"]
+  T -->|Yes| U{Stock Available?}
+  U -->|No| P[Trigger Purchase / Production]
+  P --> U
+  U -->|Yes| V[Delivery Note]
 
-  V --> W[Sales Invoice]
+  V --> W
   W --> X{Payment Received?}
   X -->|No| Y[Accounts Receivable]
   X -->|Yes| Z[Payment Entry]
 
-  Z --> AA[Update Accounting Records]
-
-  %% ===========================
-  %% Optional: Blanket Order
-  %% ===========================
-  AB[Blanket Order] --> Q
-
-  %% ===========================
-  %% POS Flow (Retail Sales)
-  %% ===========================
-  AC[POS Profile & Settings] --> AD[POS Opening Entry]
-  AD --> AE[POS Sales Invoice]
-  AE --> AF[Loyalty Point Entry]
-  AF --> AG[POS Closing Entry]
-
-  %% ===========================
-  %% Campaign / CRM Link
-  %% ===========================
-  AH[Campaign] --> Q
-  AI[Lead Source] --> Q`
+  Z --> AA[Update Accounting Records]`
 
 const interCompanyFlowchart = `flowchart TD
   %% ===========================
